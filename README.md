@@ -134,9 +134,10 @@ linux 为 `/home/用户名/`, root 用户为 `/root/`
 - [ ] 体验优化 - 自定义支持预览的文件后缀 (正则表达式)
 - [ ] 体验优化 - 一键安装脚本
 
-## 支持作者
+[comment]: <> (## 支持作者)
 
-如果本项目对你有帮助，请作者喝杯咖啡吧。
+[comment]: <> (如果本项目对你有帮助，请作者喝杯咖啡吧。)
 
-<img src="http://cdn.jun6.net/alipay.png" width="200" height="312">
-<img src="http://cdn.jun6.net/wechat.png" width="222" height="300">
+[comment]: <> (<img src="http://cdn.jun6.net/alipay.png" width="200" height="312">)
+
+[comment]: <> (<img src="http://cdn.jun6.net/wechat.png" width="222" height="300">)
