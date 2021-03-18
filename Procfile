@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dspring.profiles.active=prod-mysql $JAVA_OPTS -jar target/zfile-3.0.jar
+web: java -Dserver.port=$PORT -Dspring.profiles.active=prod-mysql -Dzfile.db.pwd=q4r40k $JAVA_OPTS -jar target/zfile-3.0.jar

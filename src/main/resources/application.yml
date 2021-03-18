@@ -64,7 +64,7 @@ spring:
         format_sql: false
     show-sql: true
 #    database: mysql
-#    database-platform: org.hibernate.dialect.MySQLDialect
+#    database-platform: org.hibernate.dialect.MySQL5Dialect
   resources:
     chain:
       gzipped: true
@@ -95,9 +95,9 @@ spring:
   profiles: prod-mysql
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://yinn:3306/zfile3_db?useUnicode=true&characterEncoding=UTF8
-    username: root
-    password: yinn357
+    url: jdbc:mysql://vwkj6eq6.2419.dnstoo.com:5501/q4r40k?useUnicode=true&characterEncoding=utf8
+    username: q4r40k_f
+    password: ${zfile.db.pwd}
 ---
 spring:
   profiles: dev-mysql
