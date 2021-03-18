@@ -30,7 +30,7 @@ zfile:
     scope: offline_access User.Read Files.ReadWrite.All
 
 server:
-  port: 8080
+  port: 8088
   servlet:
     context-path: ''
   tomcat:
@@ -39,12 +39,6 @@ server:
     enabled: true
 
 spring:
-  h2:
-    console:
-      settings:
-        web-allow-others: true
-      path: /h2-console
-      enabled: ${zfile.debug}
   datasource:
     # 初始化数据导入
     data: classpath*:db/data.sql
@@ -54,16 +48,11 @@ spring:
     continue-on-error: true
 
     # h2 内存数据库 配置
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:${zfile.db.path}
-    username: zfile
-    password: 123456
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:${zfile.db.path}
+#    username: zfile
+#    password: 123456
 
-    # MySQL 配置
-  #    driver-class-name: com.mysql.jdbc.Driver
-  #    url: jdbc:mysql://127.0.0.1:3306/zfile?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
-  #    username: root
-  #    password: 123456
   jackson:
     date-format: yyyy-MM-dd HH:mm
     time-zone: GMT+8
@@ -73,9 +62,40 @@ spring:
     properties:
       hibernate:
         format_sql: false
-    show-sql: false
+    show-sql: true
+#    database: mysql
+#    database-platform: org.hibernate.dialect.MySQLDialect
   resources:
     chain:
       gzipped: true
   profiles:
-    active: prod
+    active: prod-mysql
+
+
+---
+spring:
+  profiles: prod-h2
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+      path: /h2-console
+      enabled: ${zfile.debug}
+  datasource:
+
+    # h2 内存数据库 配置
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:${zfile.db.path}
+    username: zfile
+    password: 123456
+---
+# MySQL 配置
+# 需要设置数据库忽略大小写 lower_case_table_names=1
+spring:
+  profiles: prod-mysql
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://hk7r50dp.2419.dnstoo.com:5501/fzz7ao?useUnicode=true&characterEncoding=UTF8
+    username: fzz7ao_f
+    password: fzz7ao
+---
