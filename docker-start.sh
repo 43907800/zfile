@@ -1,6 +1,6 @@
 git pull origin master
 
-mvn clear package
+mvn clean package
 
 docker stop zfile3
 docker rm zfile3
