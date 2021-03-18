@@ -95,7 +95,14 @@ spring:
   profiles: prod-mysql
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://hk7r50dp.2419.dnstoo.com:5501/fzz7ao?useUnicode=true&characterEncoding=UTF8
+    url: jdbc:mysql://yinn:3306/zfile3_db?useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: yinn357
+---
+spring:
+  profiles: dev-mysql
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://zzidc001:5501/fzz7ao?useUnicode=true&characterEncoding=UTF8
     username: fzz7ao_f
     password: fzz7ao
----
