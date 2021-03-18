@@ -24,4 +24,14 @@ public class AudioInfoDTO {
         return audioInfoDTO;
     }
 
+    public static AudioInfoDTO buildDefaultAudioInfoDTO(String url) {
+        AudioInfoDTO audioInfoDTO = new AudioInfoDTO();
+        audioInfoDTO.setTitle("未知歌曲");
+        audioInfoDTO.setArtist("未知");
+        audioInfoDTO.setSrc(url);
+        audioInfoDTO.setCover("http://c.jun6.net/audio.png");
+        return audioInfoDTO;
+    }
+
+
 }
