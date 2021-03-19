@@ -8,6 +8,7 @@ import im.zhaojun.zfile.model.constant.ZFileConstant;
 import im.zhaojun.zfile.model.dto.FileItemDTO;
 import im.zhaojun.zfile.model.enums.FileTypeEnum;
 import im.zhaojun.zfile.service.base.AbstractBaseFileService;
+import im.zhaojun.zfile.util.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,20 +58,22 @@ public class DirectLinkController {
 
         String url = fileItem.getUrl();
 
-        int queryIndex = url.indexOf('?');
+        if (url != null) {
+            int queryIndex = url.indexOf('?');
 
-        if (queryIndex != -1) {
-            String origin = url.substring(0, queryIndex);
-            String queryString = url.substring(queryIndex + 1);
+            if (queryIndex != -1) {
+                String origin = url.substring(0, queryIndex);
+                String queryString = url.substring(queryIndex + 1);
 
-            url = URLUtil.encode(origin) + "?" + URLUtil.encode(queryString);
-        } else {
-            url = URLUtil.encode(url);
+                url = URLUtil.encode(origin) + "?" + URLUtil.encode(queryString);
+            } else {
+                url = URLUtil.encode(url);
+            }
         }
 
-
         if (Objects.equals(fileItem.getType(), FileTypeEnum.FOLDER)) {
-            return "redirect:" + fileItem.getUrl();
+            String folderPath = URLUtil.encode(StringUtils.removeDuplicateSeparator("/"+driveId+"/main"+ filePath));
+            return "redirect:/#" + folderPath;
         } else {
             return "redirect:" + url;
         }
