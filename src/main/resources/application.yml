@@ -98,11 +98,19 @@ spring:
     url: jdbc:mysql://${zfile.db.url}:5501/q4r40k?useUnicode=true&characterEncoding=utf8
     username: q4r40k_f
     password: ${zfile.db.pwd}
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: im.zhaojun.zfile.config.MySQLUpperCaseStrategy
 ---
 spring:
   profiles: dev-mysql
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://zzidc001:5501/fzz7ao?useUnicode=true&characterEncoding=UTF8
-    username: fzz7ao_f
-    password: fzz7ao
+#    url: jdbc:mysql://zzidc001:5501/fzz7ao?useUnicode=true&characterEncoding=UTF8
+#    username: fzz7ao_f
+#    password: fzz7ao
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: im.zhaojun.zfile.config.MySQLUpperCaseStrategy
