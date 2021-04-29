@@ -10,6 +10,7 @@ import im.zhaojun.zfile.model.entity.ErgodicDirConfig;
 import im.zhaojun.zfile.model.entity.SystemConfig;
 import im.zhaojun.zfile.model.enums.FileTypeEnum;
 import im.zhaojun.zfile.service.base.AbstractBaseFileService;
+import im.zhaojun.zfile.util.FileComparator;
 import im.zhaojun.zfile.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -90,7 +91,12 @@ public class FileTcService {
         List<FileItemDTO> fileItemList =
                 fileService.fileList(StringUtils.removeDuplicateSeparator(ZFileConstant.PATH_SEPARATOR + path + ZFileConstant.PATH_SEPARATOR));
 
-        for (FileItemDTO itemDTO : fileItemList) {
+        // 创建副本, 防止排序和过滤对原数据产生影响
+        List<FileItemDTO> copyList = new ArrayList<>(fileItemList);
+        // 按照自然排序
+        copyList.sort(new FileComparator("", "asc"));
+
+        for (FileItemDTO itemDTO : copyList) {
             // 跳过密码文件
             if (ZFileConstant.PASSWORD_FILE_NAME.equals(itemDTO.getName())) continue;
             if (itemDTO.getType() == FileTypeEnum.FILE){

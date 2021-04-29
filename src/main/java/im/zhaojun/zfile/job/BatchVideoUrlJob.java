@@ -1,6 +1,7 @@
 package im.zhaojun.zfile.job;
 
 import cn.hutool.cron.CronUtil;
+import cn.hutool.system.SystemUtil;
 import im.zhaojun.zfile.model.entity.ErgodicDirConfig;
 import im.zhaojun.zfile.service.ErgodicDirService;
 import im.zhaojun.zfile.service.FileTcService;
@@ -27,6 +28,7 @@ public class BatchVideoUrlJob {
 
 
     public synchronized void  execute() {
+        log.info("定时任务已执行!");
         dirFileHandle();
     }
 
