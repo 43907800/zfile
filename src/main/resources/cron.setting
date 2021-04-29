@@ -1,0 +1,4 @@
+# 定时任务
+[im.zhaojun.zfile.job]
+# 0 0 */1 * *
+BatchVideoUrlJob.execute = */1 * * * *
