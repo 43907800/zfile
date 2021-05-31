@@ -46,7 +46,7 @@ public class DirectLinkController {
      *
      * @return  重定向至文件直链
      */
-    @GetMapping("/directlink/{driveId}/**")
+    @GetMapping("/${zfile.directLinkPrefix}/{driveId}/**")
     public String directlink(@PathVariable("driveId") Integer driveId,
                              final HttpServletRequest request,
                              final HttpServletResponse response) throws IOException {
@@ -74,7 +74,7 @@ public class DirectLinkController {
         if (url != null) {
             if (StrUtil.equalsIgnoreCase(FileUtil.extName(fileItem.getName()), "m3u8")) {
                 String textContent = HttpUtil.getTextContent(url);
-                response.setContentType("application/json;charset=utf-8");
+                response.setContentType("application/vnd.apple.mpegurl;charset=utf-8");
                 PrintWriter out = response.getWriter();
                 out.write(textContent);
                 out.flush();

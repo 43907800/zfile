@@ -6,6 +6,7 @@ import im.zhaojun.zfile.context.DriveContext;
 import im.zhaojun.zfile.exception.NotEnabledDriveException;
 import im.zhaojun.zfile.exception.PasswordVerifyException;
 import im.zhaojun.zfile.model.constant.ZFileConstant;
+import im.zhaojun.zfile.model.dto.DriveListDTO;
 import im.zhaojun.zfile.model.dto.FileItemDTO;
 import im.zhaojun.zfile.model.dto.FileListDTO;
 import im.zhaojun.zfile.model.dto.SystemFrontConfigDTO;
@@ -67,7 +68,10 @@ public class FileController {
      */
     @GetMapping("/drive/list")
     public ResultBean drives() {
-        return ResultBean.success(driveConfigService.listOnlyEnable());
+        List<DriveConfig> driveList = driveConfigService.listOnlyEnable();
+        boolean isInstall = systemConfigService.getIsInstall();
+        DriveListDTO driveListDTO = new DriveListDTO(driveList, isInstall);
+        return ResultBean.success(driveListDTO);
     }
 
     /**
@@ -118,9 +122,9 @@ public class FileController {
             throw new NotEnabledDriveException();
         }
 
-
         systemConfig.setDebugMode(debug);
         systemConfig.setDefaultSwitchToImgMode(driveConfig.getDefaultSwitchToImgMode());
+        systemConfig.setDirectLinkPrefix(ZFileConstant.DIRECT_LINK_PREFIX);
 
         // 如果不是 FTP 模式，则尝试获取当前文件夹中的 README 文件，有则读取，没有则停止
         if (!Objects.equals(driveConfig.getType(), StorageTypeEnum.FTP)) {
@@ -134,24 +138,6 @@ public class FileController {
         }
 
         return ResultBean.successData(new FileListDTO(copyList, systemConfig));
-    }
-
-
-    /**
-     * 获取指定路径下的文件信息内容
-     *
-     * @param   driveId
-     *          驱动器 ID
-     *
-     * @param   path
-     *          文件全路径
-     *
-     * @return  该文件的名称, 路径, 大小, 下载地址等信息.
-     */
-    @GetMapping("/directlink/{driveId}")
-    public ResultBean directlink(@PathVariable(name = "driveId") Integer driveId, String path) {
-        AbstractBaseFileService fileService = driveContext.get(driveId);
-        return ResultBean.successData(fileService.getFileItem(path));
     }
 
 
