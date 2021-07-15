@@ -49,10 +49,10 @@ spring:
     continue-on-error: true
 
     # h2 内存数据库 配置
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:${zfile.db.path}
-#    username: zfile
-#    password: 123456
+  #    driver-class-name: org.h2.Driver
+  #    url: jdbc:h2:${zfile.db.path}
+  #    username: zfile
+  #    password: 123456
 
   jackson:
     date-format: yyyy-MM-dd HH:mm
@@ -64,13 +64,13 @@ spring:
       hibernate:
         format_sql: false
     show-sql: true
-#    database: mysql
-#    database-platform: org.hibernate.dialect.MySQL5Dialect
+  #    database: mysql
+  #    database-platform: org.hibernate.dialect.MySQL5Dialect
   resources:
     chain:
       gzipped: true
   profiles:
-    active: prod-mysql
+    active: dev-mysql
 
 
 ---
@@ -96,8 +96,8 @@ spring:
   profiles: prod-mysql
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${zfile.db.url}:5501/q4r40k?useUnicode=true&characterEncoding=utf8
-    username: q4r40k_f
+    url: jdbc:mysql://${zfile.db.host}/${zfile.db.name}?useUnicode=true&characterEncoding=utf8
+    username: ${zfile.db.user}
     password: ${zfile.db.pwd}
   jpa:
     hibernate:
@@ -108,9 +108,9 @@ spring:
   profiles: dev-mysql
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://zzidc001:5501/fzz7ao?useUnicode=true&characterEncoding=UTF8
-#    username: fzz7ao_f
-#    password: fzz7ao
+    url: jdbc:mysql://zzidc001:5501/fzz7ao?useUnicode=true&characterEncoding=UTF8
+    username: fzz7ao_f
+    password: fzz7ao
   jpa:
     hibernate:
       naming:
